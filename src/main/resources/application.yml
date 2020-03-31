@@ -55,7 +55,6 @@ spring:
 logging:
   level:
     root: warn
-    com.patagoniait: info
     org.hibernate: warn
 
 debug: false
