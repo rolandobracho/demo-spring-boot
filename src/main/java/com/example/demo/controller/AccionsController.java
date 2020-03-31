@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-//import com.patagoniait.puc.bioetica.api.service.AccionesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,6 @@ public class AccionsController {
     public
     @ResponseBody
     ResponseEntity hola(@RequestParam("idTest") Long idtest) throws IOException {
-//        accionesService.anularSolicitud(idSolicitud,idMotivo,motivoOtro);
         ResponseEntity response = new ResponseEntity(HttpStatus.OK);
         return response;
     }
