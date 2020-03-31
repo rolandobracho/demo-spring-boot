@@ -16,8 +16,8 @@ import java.io.*;
  */
 @Configurable
 @Service
-public class AccionsService {
-    private Logger logger = LoggerFactory.getLogger(AccionsService.class);
+public class CoursesService {
+    private Logger logger = LoggerFactory.getLogger(CoursesService.class);
 
     @Autowired
     private CourseRepo courseRepo;
