@@ -1,0 +1,61 @@
+base:
+  db:
+    server: localhost
+    port: 3306
+    database: myApp
+    username: root
+    password: root
+
+jwt:
+  cookie:
+    name: JWT-APP-TOKEN
+    secure: false
+    expire: -1
+  key: signingKey
+  domain: localhost
+  token:
+    expire: 14400
+
+cors:
+  allowed-origin: localhost:8080
+  allowed-methods: GET, POST, PUT, PATCH, DELETE
+
+#server:
+#  address: 0.0.0.0
+#  port: 8080
+#  context-path: /app
+#  compression:
+#    enabled: false
+#  display-nombre: app-api
+
+spring:
+  data:
+    rest:
+      basePath: /api
+      defaultPageSize: 25
+      maxPageSize: 200
+  application:
+    name: demo-application
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: false
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${base.db.server}:${base.db.port}/${base.db.database}?verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: ${base.db.username}
+    password: ${base.db.password}
+  devtools:
+    livereload:
+      enabled: false
+
+logging:
+  level:
+    root: warn
+    com.patagoniait: info
+    org.hibernate: warn
+
+debug: false
