@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Course;
 import com.example.demo.repo.CourseRepo;
+import org.apache.commons.collections.IteratorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by rolando on 07-10-16.
@@ -30,5 +32,8 @@ public class CoursesService {
         return course.getName();
     }
 
-
+    public List<Course> findAll() {
+        List<Course> courses = IteratorUtils.toList(courseRepo.findAll().iterator());
+        return courses;
+    }
 }
