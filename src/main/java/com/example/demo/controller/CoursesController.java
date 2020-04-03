@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Course;
+import com.example.demo.domain.Student;
 import com.example.demo.service.CoursesService;
+import com.example.demo.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class CoursesController {
     @Autowired
     CoursesService coursesService;
 
+    @Autowired
+    StudentsService studentsService;
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -34,10 +39,15 @@ public class CoursesController {
         return new ResponseEntity<Course>(course, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    List<Course> findAll() {
-        return coursesService.findAll();
+    @RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Student> getStudentsByCourse(@PathVariable("id") Long idCourse) throws IOException {
+        return studentsService.findByCourseId(idCourse);
     }
+
+    @GetMapping("/all")
+    List<Course> findAll() { return coursesService.findAll();}
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public
