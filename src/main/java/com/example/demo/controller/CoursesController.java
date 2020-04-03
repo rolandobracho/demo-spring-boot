@@ -21,16 +21,51 @@ public class CoursesController {
     @Autowired
     CoursesService coursesService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    ResponseEntity course(@RequestParam("id") Long idCourse) throws IOException {
-        String nombre = coursesService.getCourse(idCourse);
-        return new ResponseEntity<>("Your idCourse is " + nombre, HttpStatus.OK);
+    ResponseEntity course(@PathVariable("id") Long id) throws IOException {
+        Course course = coursesService.getCourse(id);
+
+        if (course == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Course>(course, HttpStatus.OK);
     }
 
     @GetMapping("/all")
     List<Course> findAll() {
         return coursesService.findAll();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public
+    @ResponseBody
+    ResponseEntity delete(@PathVariable("id") Long id) throws IOException {
+        Course course = coursesService.getCourse(id);
+
+        if (course == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        coursesService.delete(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public
+    @ResponseBody
+    ResponseEntity update(@PathVariable("id") Long id, @RequestBody Course inCourse ) throws IOException {
+        Course newCourse = coursesService.save(inCourse);
+        return new ResponseEntity<Course>(newCourse, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity create(@RequestBody Course newCourse ) throws IOException {
+        Course course = coursesService.save(newCourse);
+        return new ResponseEntity<Course>(newCourse, HttpStatus.CREATED);
     }
 }

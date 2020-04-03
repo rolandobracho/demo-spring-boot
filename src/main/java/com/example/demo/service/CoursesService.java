@@ -27,13 +27,20 @@ public class CoursesService {
     @Autowired
     ServletContext servletContext;
 
-    public String getCourse(Long idCourse) throws IOException {
-        Course course = courseRepo.findOne(idCourse);
-        return course.getName();
+    public Course getCourse(Long idCourse) throws IOException {
+        return courseRepo.findOne(idCourse);
     }
 
     public List<Course> findAll() {
         List<Course> courses = IteratorUtils.toList(courseRepo.findAll().iterator());
         return courses;
+    }
+
+    public void delete(Long id) {
+        courseRepo.delete(id);
+    }
+
+    public Course save(Course course) {
+        return courseRepo.save(course);
     }
 }
