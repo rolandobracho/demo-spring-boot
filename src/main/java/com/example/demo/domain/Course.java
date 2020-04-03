@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +10,8 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     String name;
+    @Length(max = 4 )
     String code;
 
     public Long getId() {

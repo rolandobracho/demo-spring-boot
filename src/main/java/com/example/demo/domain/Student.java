@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "student")
@@ -12,6 +13,7 @@ public class Student {
     String rut;
     String name;
     String lastName;
+    @Size(min = 18)
     Long age;
 
     @ManyToOne(cascade = CascadeType.ALL)
